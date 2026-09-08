@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enersit Labs | Sovereign Defense AI & Big Data Intelligence</title>
+  <meta name="description" content="Enersit Labs builds 100% air-gapped, GPU-accelerated RAG and tactical intelligence platforms for defense forces, intelligence agencies, and sovereign operations.">
+  <meta name="keywords" content="Defense AI, Air-Gapped RAG, Sovereign AI, Palantir India, Tactical Intelligence, Military AI, Qwen3 LoRA, Rut Patel">
+  <meta property="og:title" content="Enersit Labs | Sovereign Defense AI & Tactical Intelligence">
+  <meta property="og:description" content="Building air-gapped, GPU-accelerated RAG platforms with zero cloud leaks and verified line-by-line claim cross-referencing.">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%2250,5 95,28 95,72 50,95 5,72 5,28%22 fill=%22%23040d1a%22 stroke=%22%2300f0ff%22 stroke-width=%225%22/><circle cx=%2250%22 cy=%2250%22 r=%2220%22 fill=%22none%22 stroke=%22%2300ff9d%22 stroke-width=%224%22/><path d=%22M50 30 L50 70 M30 50 L70 50%22 stroke=%22%2300f0ff%22 stroke-width=%223%22/></svg>">
+</head>
+<body class="bg-dark text-gray-100 font-sans antialiased selection:bg-cyan selection:text-black overflow-x-hidden">
+
+  <!-- Tactical Grid Canvas Background -->
+  <canvas id="radarCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-20"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-opacity-80 border-b border-defense-border" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex items-center justify-center bg-cyan-950/40 border border-cyan/40 rounded-lg group-hover:border-cyan transition-colors">
+            <svg class="w-6 h-6 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald"></span>
+            </span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-heading font-bold text-xl tracking-wider text-white">ENERSIT<span class="text-cyan">LABS</span></span>
+              <span class="badge-airgapped text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border border-emerald/30 bg-emerald/10 text-emerald">Air-Gapped</span>
+            </div>
+            <div class="text-[10px] font-mono text-gray-400 tracking-widest uppercase">Sovereign Defense AI</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-6 text-xs font-mono uppercase tracking-wider text-gray-300">
+          <a href="#problem" class="hover:text-cyan transition-colors">Vulnerabilities</a>
+          <a href="#platform" class="hover:text-cyan transition-colors">Tactical UI</a>
+          <a href="#technology" class="hover:text-cyan transition-colors">Architecture</a>
+          <a href="#sectors" class="hover:text-cyan transition-colors">Sectors</a>
+          <a href="#market" class="hover:text-cyan transition-colors">Market</a>
+          <a href="#founder" class="hover:text-cyan transition-colors">Founder</a>
+          <a href="#roadmap" class="hover:text-cyan transition-colors">Milestones</a>
+        </nav>
+
+        <!-- CTA & Status -->
+        <div class="hidden sm:flex items-center gap-4">
+          <div class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-800 bg-gray-900/60 font-mono text-[11px] text-gray-400">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald animate-pulse"></span>
+            <span>SYSTEM: 100% AIR-GAPPED</span>
+          </div>
+          <a href="#contact" class="btn-primary flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-md">
+            <span>Request Briefing</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" class="lg:hidden p-2 text-gray-400 hover:text-white" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden border-b border-defense-border bg-defense-dark/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-3 font-mono text-sm uppercase">
+      <a href="#problem" class="block py-2 text-gray-300 hover:text-cyan">Vulnerabilities</a>
+      <a href="#platform" class="block py-2 text-gray-300 hover:text-cyan">Tactical UI</a>
+      <a href="#technology" class="block py-2 text-gray-300 hover:text-cyan">Architecture</a>
+      <a href="#sectors" class="block py-2 text-gray-300 hover:text-cyan">Target Sectors</a>
+      <a href="#market" class="block py-2 text-gray-300 hover:text-cyan">Market & Business</a>
+      <a href="#founder" class="block py-2 text-gray-300 hover:text-cyan">Leadership</a>
+      <a href="#roadmap" class="block py-2 text-gray-300 hover:text-cyan">Fund Plan & Roadmap</a>
+      <a href="#contact" class="block py-2.5 text-center bg-cyan text-black font-bold rounded">Request Briefing</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden border-b border-defense-border">
+    <!-- Hero Background Image with Tactical Shader Overlays -->
+    <div class="absolute inset-0 z-0">
+      <img src="assets/images/hero-bg.jpg" alt="Defense Intelligence Command Center" class="w-full h-full object-cover object-center opacity-35 scale-105 transform filter contrast-125">
+      <div class="absolute inset-0 bg-gradient-to-t from-defense-dark via-defense-dark/85 to-defense-dark/60"></div>
+      <div class="absolute inset-0 bg-radar-grid opacity-15"></div>
+      <div class="scanline"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+      
+      <!-- High-Tech Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan/40 bg-cyan-950/40 text-cyan text-xs font-mono uppercase tracking-widest mb-8 shadow-glow-cyan animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-cyan animate-ping"></span>
+        <span>GENESIS EIR Grant Recipient &bull; MSME Registered &bull; Palanpur, Gujarat</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-5xl mx-auto leading-tight sm:leading-none mb-6">
+        SOVEREIGN DEFENSE AI &amp; <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-teal to-emerald">AIR-GAPPED TACTICAL RAG</span>
+      </h1>
+
+      <!-- Subtitle with exact PDF mission -->
+      <p class="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+        Building offline, GPU-accelerated Retrieval-Augmented Generation &amp; Big Data intelligence platforms.
+        Engineered specifically for defense forces, intelligence agencies, and sovereign government operations with 
+        <span class="text-white font-semibold">zero cloud exposure</span> and <span class="text-cyan font-mono">100% data sovereignty</span>.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="#platform" class="w-full sm:w-auto btn-primary flex items-center justify-center gap-3 font-mono font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-lg shadow-glow-cyan">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span>Launch Tactical Console Demo</span>
+        </a>
+        <a href="#technology" class="w-full sm:w-auto btn-secondary flex items-center justify-center gap-3 font-mono font-medium uppercase tracking-wider text-sm px-8 py-4 rounded-lg">
+          <svg class="w-4 h-4 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <span>Technical Architecture</span>
+        </a>
+      </div>
+
+      <!-- Tactical Key Benchmark Metrics (Direct from Prototype PDF) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        
+        <div class="metric-card p-5 rounded-xl border border-defense-border bg-defense-card/80 backdrop-blur-md">
+          <div class="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
+            <span>DATA ISOLATION</span>
+            <span class="text-emerald">ACTIVE</span>
+          </div>
+          <div class="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">100%</div>
+          <div class="text-xs font-mono text-cyan mt-1">Air-Gapped Sovereign</div>
+          <div class="text-[11px] text-gray-400 mt-2">Zero cloud telemetry or external API reliance</div>
+        </div>
+
+        <div class="metric-card p-5 rounded-xl border border-defense-border bg-defense-card/80 backdrop-blur-md">
+          <div class="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
+            <span>QUERY LATENCY</span>
+            <span class="text-cyan">BENCHMARK</span>
+          </div>
+          <div class="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">&lt; 1.2s</div>
+          <div class="text-xs font-mono text-cyan mt-1">Hybrid RAG Retrieval</div>
+          <div class="text-[11px] text-gray-400 mt-2">Sparse BM25 + Dense vector fused indexing</div>
+        </div>
+
+        <div class="metric-card p-5 rounded-xl border border-defense-border bg-defense-card/80 backdrop-blur-md">
+          <div class="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
+            <span>EDGE FOOTPRINT</span>
+            <span class="text-purple-400">OPTIMIZED</span>
+          </div>
+          <div class="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">3.6 GB</div>
+          <div class="text-xs font-mono text-cyan mt-1">GTX / RTX CUDA 12.6</div>
+          <div class="text-[11px] text-gray-400 mt-2">2 model replicas operating on 4GB edge hardware</div>
+        </div>
+
+        <div class="metric-card p-5 rounded-xl border border-defense-border bg-defense-card/80 backdrop-blur-md">
+          <div class="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
+            <span>HALLUCINATION</span>
+            <span class="text-emerald">VERIFIED</span>
+          </div>
+          <div class="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">0.0%</div>
+          <div class="text-xs font-mono text-cyan mt-1">Claim Verification</div>
+          <div class="text-[11px] text-gray-400 mt-2">Automated line-by-line ground-truth fact audit</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Market Pain Points vs. Sovereign Solution -->
+  <section id="problem" class="py-24 relative border-b border-defense-border bg-defense-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-block text-xs font-mono uppercase tracking-widest text-amber-400 mb-3 px-3 py-1 bg-amber-950/30 border border-amber-500/30 rounded">
+          Critical Defense Dilemma
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          Commercial AI Fails In Tactical &amp; Defense Environments
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Modern defense and intelligence units manage petabytes of mission data but are blocked by fundamental cloud vulnerabilities and unreliable models.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        
+        <!-- Pain Point 1 -->
+        <div class="pain-card p-8 rounded-xl border border-red-900/30 bg-gradient-to-b from-red-950/20 to-defense-card/80 relative overflow-hidden group hover:border-red-600/50 transition-all">
+          <div class="w-12 h-12 rounded-lg bg-red-950/50 border border-red-800/40 flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <span class="text-xs font-mono text-red-400 tracking-wider uppercase">Vulnerability 01</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-3">Fragmented Data Silos</h3>
+          <p class="text-gray-300 text-sm leading-relaxed mb-4">
+            Defense forces, police units, and intelligence agencies handle terabytes of unindexed daily scans, news feeds, OSINT signals, and operational archives across disconnected networks.
+          </p>
+          <ul class="space-y-2 text-xs font-mono text-gray-400 border-t border-defense-border pt-4">
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Slow tactical search across departments</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Hours lost manually linking threat entities</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Delayed critical frontline decisions</li>
+          </ul>
+        </div>
+
+        <!-- Pain Point 2 -->
+        <div class="pain-card p-8 rounded-xl border border-red-900/30 bg-gradient-to-b from-red-950/20 to-defense-card/80 relative overflow-hidden group hover:border-red-600/50 transition-all">
+          <div class="w-12 h-12 rounded-lg bg-red-950/50 border border-red-800/40 flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+          </div>
+          <span class="text-xs font-mono text-red-400 tracking-wider uppercase">Vulnerability 02</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-3">Cloud Data Leak Risks</h3>
+          <p class="text-gray-300 text-sm leading-relaxed mb-4">
+            Commercial AI solutions (OpenAI, Claude, external cloud SaaS APIs) rely on foreign public cloud servers, violating strict defense air-gap policies and data sovereignty laws.
+          </p>
+          <ul class="space-y-2 text-xs font-mono text-gray-400 border-t border-defense-border pt-4">
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Exposes classified intelligence to foreign servers</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Strictly banned across military &amp; security setups</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Zero local control over model weights &amp; params</li>
+          </ul>
+        </div>
+
+        <!-- Pain Point 3 -->
+        <div class="pain-card p-8 rounded-xl border border-red-900/30 bg-gradient-to-b from-red-950/20 to-defense-card/80 relative overflow-hidden group hover:border-red-600/50 transition-all">
+          <div class="w-12 h-12 rounded-lg bg-red-950/50 border border-red-800/40 flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <span class="text-xs font-mono text-red-400 tracking-wider uppercase">Vulnerability 03</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-3">AI Hallucination &amp; Zero Audit</h3>
+          <p class="text-gray-300 text-sm leading-relaxed mb-4">
+            Generic LLMs produce unverified, fabricated facts and lack automated cross-referencing against official military archives. An unacceptable risk in defense operations.
+          </p>
+          <ul class="space-y-2 text-xs font-mono text-gray-400 border-t border-defense-border pt-4">
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Fatal risk in security and tactical operations</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Absence of ground-truth audit trails</li>
+            <li class="flex items-center gap-2"><span class="text-red-500">&times;</span> Cannot process classified non-standard military formats</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- The Enersit Solution Banner -->
+      <div class="p-8 sm:p-10 rounded-2xl border border-cyan/40 bg-gradient-to-r from-defense-card via-cyan-950/30 to-defense-card relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="max-w-2xl">
+            <div class="flex items-center gap-2 text-emerald font-mono text-xs uppercase tracking-widest mb-2">
+              <span class="w-2 h-2 rounded-full bg-emerald"></span>
+              <span>The Sovereign Answer</span>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white mb-3">
+              Enersit Labs: Palantir-Style Sovereign RAG Platform
+            </h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              We eliminate external cloud exposure completely by fine-tuning local open-source models (Qwen3 + LoRA), deploying dynamic multi-GPU inference engines, and enforcing line-by-line automated ground-truth citation checks.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-4 w-full lg:w-auto shrink-0">
+            <div class="p-4 rounded-lg bg-defense-dark/80 border border-defense-border font-mono text-xs">
+              <div class="text-cyan font-bold mb-1">&check; 100% Offline</div>
+              <div class="text-gray-400">Zero Cloud Dependency</div>
+            </div>
+            <div class="p-4 rounded-lg bg-defense-dark/80 border border-defense-border font-mono text-xs">
+              <div class="text-emerald font-bold mb-1">&check; Verified RAG</div>
+              <div class="text-gray-400">BM25 + Dense Vectors</div>
+            </div>
+            <div class="p-4 rounded-lg bg-defense-dark/80 border border-defense-border font-mono text-xs">
+              <div class="text-purple-400 font-bold mb-1">&check; Multi-GPU Engine</div>
+              <div class="text-gray-400">Dynamic VRAM Balancer</div>
+            </div>
+            <div class="p-4 rounded-lg bg-defense-dark/80 border border-defense-border font-mono text-xs">
+              <div class="text-amber-400 font-bold mb-1">&check; Palantir Command</div>
+              <div class="text-gray-400">Graph Entity Analytics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Palantir-Style Tactical Platform Demo (Documented in Prototype v2.0) -->
+  <section id="platform" class="py-24 relative border-b border-defense-border bg-gradient-to-b from-defense-dark via-[#040d1a] to-defense-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan mb-3 px-3 py-1 bg-cyan-950/30 border border-cyan/30 rounded">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-ping"></span>
+          <span>System Version: v2.0 (Local GPU RAG)</span>
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          Tactical Command Console UI
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Live simulation of Enersit Labs' operational dashboard: interactive query synthesis, entity relationship graph, and real-time CUDA telemetry.
+        </p>
+      </div>
+
+      <!-- Tactical UI Simulation Shell -->
+      <div class="tactical-window rounded-2xl border border-defense-border bg-defense-dark/95 shadow-2xl overflow-hidden backdrop-blur-xl">
+        
+        <!-- Terminal Header / Telemetry Bar -->
+        <div class="bg-[#061122] border-b border-defense-border px-4 py-3 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald inline-block"></span>
+            </div>
+            <span class="text-gray-400">|</span>
+            <span class="font-bold text-white flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+              ENERSIT LABS // SOVEREIGN PLATFORM v2.0
+            </span>
+          </div>
+
+          <div class="flex items-center gap-4 text-[11px] text-gray-300">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span> GPU: <strong class="text-cyan">GTX 1650 [CUDA 12.6]</strong></span>
+            <span class="hidden sm:inline text-gray-500">|</span>
+            <span class="hidden sm:flex items-center gap-1">REPLICAS: <strong class="text-emerald">2 ACTIVE</strong></span>
+            <span class="text-gray-500">|</span>
+            <span class="flex items-center gap-1 text-emerald">AIR-GAPPED: <strong>ISOLATED</strong></span>
+          </div>
+        </div>
+
+        <!-- Interactive Preset Query Selector -->
+        <div class="bg-[#030914] border-b border-defense-border px-4 sm:px-6 py-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono text-xs">
+          <div class="text-gray-400 flex items-center gap-2">
+            <span class="text-cyan">&gt;</span> SELECT TACTICAL SCENARIO:
+          </div>
+          <div class="flex flex-wrap gap-2" id="scenarioButtons">
+            <button class="scenario-btn active px-3 py-1.5 rounded border border-cyan/40 bg-cyan-950/40 text-cyan text-[11px]" data-query="India-China Border Tensions & LAC Patrol Signals 2024" data-nodes="Sector 4 Patrol, Disengagement Agreement, Satellite Feed #892, Forward Air Base" data-source="Army Intelligence Archive #104" data-confidence="98.4%">
+              LAC Border Patrol
+            </button>
+            <button class="scenario-btn px-3 py-1.5 rounded border border-defense-border bg-defense-card text-gray-400 hover:text-white text-[11px]" data-query="Indian Ocean Maritime OSINT Vessel Tracking" data-nodes="AIS Dark Vessel #44, Coast Guard Log, Radar Track 09, Port Radar Vizag" data-source="Naval OSINT Database #22" data-confidence="96.8%">
+              Maritime OSINT
+            </button>
+            <button class="scenario-btn px-3 py-1.5 rounded border border-defense-border bg-defense-card text-gray-400 hover:text-white text-[11px]" data-query="CERT-In Threat Actor Critical Grid Attack Vector" data-nodes="C2 Server 185.x, SCADA Telemetry, Malware Signature Q3, Incident Log" data-source="CERT-In Security Archive #81" data-confidence="99.2%">
+              Cyber Defense Audit
+            </button>
+          </div>
+        </div>
+
+        <!-- Dashboard Grid Layout (Wireframe from Prototype PDF) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
+          
+          <!-- Column 1: Control Panel (3 cols) -->
+          <div class="lg:col-span-3 border-r border-defense-border p-5 bg-[#030813]/80 space-y-6 font-mono text-xs">
+            <div>
+              <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-3">COMMAND MODULES</div>
+              <ul class="space-y-1.5">
+                <li class="flex items-center justify-between px-3 py-2 rounded bg-cyan-950/30 text-cyan border border-cyan/30">
+                  <span class="flex items-center gap-2"><span>&bull;</span> Query Harness</span>
+                  <span class="text-[10px] bg-cyan/20 px-1 rounded">HOT</span>
+                </li>
+                <li class="flex items-center justify-between px-3 py-2 rounded text-gray-400 hover:bg-defense-card hover:text-white transition-colors cursor-pointer">
+                  <span class="flex items-center gap-2"><span>&bull;</span> Fact-Checker (OCR)</span>
+                  <span class="text-[10px] text-emerald">READY</span>
+                </li>
+                <li class="flex items-center justify-between px-3 py-2 rounded text-gray-400 hover:bg-defense-card hover:text-white transition-colors cursor-pointer">
+                  <span class="flex items-center gap-2"><span>&bull;</span> Geopolitical Trends</span>
+                  <span class="text-[10px] text-purple-400">SYNCED</span>
+                </li>
+                <li class="flex items-center justify-between px-3 py-2 rounded text-gray-400 hover:bg-defense-card hover:text-white transition-colors cursor-pointer">
+                  <span class="flex items-center gap-2"><span>&bull;</span> System Audit History</span>
+                  <span class="text-[10px] text-gray-500">247 LOGS</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="border-t border-defense-border pt-4">
+              <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-3">LOCAL PERSISTENCE &amp; SECURITY</div>
+              <div class="space-y-2 text-[11px] text-gray-400">
+                <div class="flex items-center justify-between">
+                  <span>Persistence DB:</span>
+                  <span class="text-white">MongoDB Local</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Authentication:</span>
+                  <span class="text-emerald">Supabase JWT RBAC</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Inference Engine:</span>
+                  <span class="text-cyan">Qwen3 + LoRA</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Network Status:</span>
+                  <span class="text-emerald font-bold">100% AIR-GAPPED</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-defense-border pt-4">
+              <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-2">MODEL SPECS</div>
+              <div class="bg-defense-dark p-3 rounded border border-defense-border space-y-1.5 text-[10px]">
+                <div class="flex justify-between"><span>Base Model:</span> <span class="text-cyan">Qwen3-Defense</span></div>
+                <div class="flex justify-between"><span>Adapter:</span> <span class="text-white">LoRA Rank-16</span></div>
+                <div class="flex justify-between"><span>Quantization:</span> <span class="text-emerald">4-Bit AWQ</span></div>
+                <div class="flex justify-between"><span>Zero-Cloud:</span> <span class="text-emerald">Enforced</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Tactical Graph & Intelligence Search (6 cols) -->
+          <div class="lg:col-span-6 p-5 sm:p-6 bg-defense-dark/60 flex flex-col justify-between space-y-6">
+            
+            <!-- Query Input Bar -->
+            <div>
+              <div class="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan"></span> ACTIVE TACTICAL QUERY:</span>
+                <span class="text-emerald font-mono text-[10px]" id="queryStatus">INFERENCE ENGINE: READY</span>
+              </div>
+              <div class="relative">
+                <div class="w-full bg-[#02060f] border border-cyan/50 rounded-lg p-3.5 font-mono text-xs text-white flex items-center gap-2 shadow-glow-cyan/20">
+                  <span class="text-cyan font-bold">&gt;</span>
+                  <span id="activeQueryText" class="text-white">India-China Border Tensions &amp; LAC Patrol Signals 2024</span>
+                  <span class="cursor-blink inline-block w-2 h-4 bg-cyan ml-1"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Graph Visualization Canvas / Interactive Mockup -->
+            <div class="relative bg-[#020713] rounded-xl border border-defense-border p-4 min-h-[260px] flex flex-col justify-between overflow-hidden">
+              <div class="absolute inset-0 bg-radar-grid opacity-20 pointer-events-none"></div>
+              
+              <!-- Graph HUD Header -->
+              <div class="relative z-10 flex items-center justify-between font-mono text-[10px] text-gray-400 border-b border-defense-border/50 pb-2">
+                <span class="flex items-center gap-1.5 text-cyan">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  PALANTIR-STYLE GRAPH VISUALIZATION ENGINE
+                </span>
+                <span class="text-emerald font-semibold" id="confidenceBadge">CONFIDENCE: 98.4%</span>
+              </div>
+
+              <!-- Visualized Tactical Nodes -->
+              <div class="relative z-10 my-6 flex flex-wrap items-center justify-center gap-4 text-xs font-mono" id="tacticalNodesContainer">
+                <div class="node-pill px-3 py-2 rounded-lg border border-cyan/60 bg-cyan-950/60 text-white flex items-center gap-2 shadow-glow-cyan/30">
+                  <span class="w-2 h-2 rounded-full bg-cyan animate-pulse"></span>
+                  <span id="node1">Sector 4 Patrol</span>
+                </div>
+                <svg class="w-5 h-5 text-gray-500 hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <div class="node-pill px-3 py-2 rounded-lg border border-emerald/60 bg-emerald-950/60 text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald"></span>
+                  <span id="node2">Disengagement Pact</span>
+                </div>
+                <svg class="w-5 h-5 text-gray-500 hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <div class="node-pill px-3 py-2 rounded-lg border border-purple-500/60 bg-purple-950/60 text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                  <span id="node3">Satellite Feed #892</span>
+                </div>
+              </div>
+
+              <!-- Synthesized Intelligence Result Preview -->
+              <div class="relative z-10 bg-defense-dark/90 p-3 rounded-lg border border-defense-border font-mono text-[11px] text-gray-300">
+                <div class="text-[10px] text-cyan uppercase font-bold mb-1">SYNTHESIZED INTEL SUMMARY (OFFLINE LOCAL RAG):</div>
+                <p id="intelSummaryText" class="leading-relaxed">
+                  Correlated 14 patrol logs with automated OCR claim verification. Satellite infrared telemetry confirms structural pullback along Sector 4 perimeter matching bilateral disengagement parameters.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Query Meta Footer -->
+            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pt-2 border-t border-defense-border">
+              <span class="flex items-center gap-2">
+                <span class="text-cyan">&bull;</span> Retrieval: BM25 (Sparse) + Dense Vector Embedding
+              </span>
+              <span class="text-gray-400">Latency: <strong class="text-white">0.94s</strong></span>
+            </div>
+
+          </div>
+
+          <!-- Column 3: GPU Health & Fact Check (3 cols) -->
+          <div class="lg:col-span-3 border-l border-defense-border p-5 bg-[#030813]/80 space-y-6 font-mono text-xs">
+            
+            <!-- Real-Time Hardware Resource Gauges -->
+            <div>
+              <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-3 flex items-center justify-between">
+                <span>GPU &amp; VRAM TELEMETRY</span>
+                <span class="text-emerald animate-pulse">&bull; LIVE</span>
+              </div>
+
+              <div class="space-y-4">
+                <!-- VRAM Usage -->
+                <div>
+                  <div class="flex justify-between text-[11px] mb-1">
+                    <span class="text-gray-400">VRAM Usage</span>
+                    <span class="text-cyan font-bold" id="vramText">3.6 GB / 4.0 GB (90%)</span>
+                  </div>
+                  <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                    <div class="bg-gradient-to-r from-cyan to-emerald h-full rounded-full transition-all duration-500" style="width: 90%;"></div>
+                  </div>
+                  <div class="text-[10px] text-gray-500 mt-1">GTX 1650 Budget Edge GPU</div>
+                </div>
+
+                <!-- Inference Throughput -->
+                <div>
+                  <div class="flex justify-between text-[11px] mb-1">
+                    <span class="text-gray-400">Inference Throughput</span>
+                    <span class="text-emerald font-bold" id="throughputText">42.8 tok/sec</span>
+                  </div>
+                  <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                    <div class="bg-emerald h-full rounded-full transition-all duration-500" style="width: 78%;"></div>
+                  </div>
+                </div>
+
+                <!-- Replicas & CUDA -->
+                <div class="grid grid-cols-2 gap-2 pt-2">
+                  <div class="p-2 rounded bg-defense-dark border border-defense-border text-center">
+                    <div class="text-gray-500 text-[10px]">CUDA CORE</div>
+                    <div class="text-white font-bold text-xs mt-0.5">12.6</div>
+                  </div>
+                  <div class="p-2 rounded bg-defense-dark border border-defense-border text-center">
+                    <div class="text-gray-500 text-[10px]">PARALLEL QUEUE</div>
+                    <div class="text-cyan font-bold text-xs mt-0.5">2 Replicas</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ground-Truth Fact Audit & Verification Card -->
+            <div class="border-t border-defense-border pt-4">
+              <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-3 flex items-center justify-between">
+                <span>GROUND TRUTH FACT AUDIT</span>
+                <span class="text-emerald font-bold">&check; 0.0% HALLUCINATION</span>
+              </div>
+
+              <div class="p-3 rounded-lg bg-emerald-950/20 border border-emerald-500/30 space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-gray-400">Source Document:</span>
+                  <span class="text-white font-bold" id="sourceDocText">Archive #104</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-gray-400">Citation Match:</span>
+                  <span class="text-emerald font-bold">100% Ground Truth</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-gray-400">Audit Status:</span>
+                  <span class="text-cyan font-bold">Verified Line-by-Line</span>
+                </div>
+                <div class="text-[10px] text-gray-400 border-t border-emerald-500/20 pt-2 leading-tight">
+                  Automated OCR text layer cross-checked against classified local database with tamper-evident cryptographic hash.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Core Technology & Architecture (Direct from Prototype PDF) -->
+  <section id="technology" class="py-24 relative border-b border-defense-border bg-defense-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-block text-xs font-mono uppercase tracking-widest text-cyan mb-3 px-3 py-1 bg-cyan-950/30 border border-cyan/30 rounded">
+          Proprietary Innovations
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          Engineered for Extreme Edge Efficiency
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Enersit Labs solves the defense hardware bottleneck by running high-precision multi-model replicas on accessible edge GPUs without relying on multi-million dollar cloud infrastructure.
+        </p>
+      </div>
+
+      <!-- System Architecture File Breakdown Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        
+        <div class="arch-card p-6 rounded-xl border border-defense-border bg-defense-card relative group hover:border-cyan transition-all">
+          <div class="text-xs font-mono text-cyan mb-2">/backend/model_engine.py</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Inference Harness</h3>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            Dynamic VRAM-aware parallel inference engine running Qwen3 with fine-tuned LoRA adapters under CUDA 12.6. Maximizes throughput on budget GPUs.
+          </p>
+          <div class="text-[11px] font-mono text-emerald bg-emerald-950/30 px-2.5 py-1 rounded border border-emerald-900/40">
+            Multi-replica dynamic scheduling
+          </div>
+        </div>
+
+        <div class="arch-card p-6 rounded-xl border border-defense-border bg-defense-card relative group hover:border-cyan transition-all">
+          <div class="text-xs font-mono text-cyan mb-2">/backend/rag_pipeline.py</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Hybrid Synthesizer</h3>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            Combines sparse BM25 lexical keyword matching with dense vector embeddings to ensure precision recall on defense jargon, serial numbers, and codes.
+          </p>
+          <div class="text-[11px] font-mono text-cyan bg-cyan-950/30 px-2.5 py-1 rounded border border-cyan-900/40">
+            Sub-1.2s hybrid retrieval
+          </div>
+        </div>
+
+        <div class="arch-card p-6 rounded-xl border border-defense-border bg-defense-card relative group hover:border-cyan transition-all">
+          <div class="text-xs font-mono text-cyan mb-2">/backend/auth.py &amp; db.py</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Air-Gapped Persistence</h3>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            MongoDB local document collections for encrypted query histories paired with Supabase JWT role-based access control (RBAC) for air-tight clearance gating.
+          </p>
+          <div class="text-[11px] font-mono text-purple-400 bg-purple-950/30 px-2.5 py-1 rounded border border-purple-900/40">
+            Zero cloud telemetry compliance
+          </div>
+        </div>
+
+        <div class="arch-card p-6 rounded-xl border border-defense-border bg-defense-card relative group hover:border-cyan transition-all">
+          <div class="text-xs font-mono text-cyan mb-2">/frontend/HarnessPanel.jsx</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Tactical Command UI</h3>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            React + Vite dark-mode dashboard providing real-time VRAM telemetry, entity graph nodes, and automated OCR claim-verification audit workflows.
+          </p>
+          <div class="text-[11px] font-mono text-amber-400 bg-amber-950/30 px-2.5 py-1 rounded border border-amber-900/40">
+            Palantir-inspired ergonomics
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comparative Benchmark Table -->
+      <div class="rounded-xl border border-defense-border bg-defense-card/80 overflow-hidden shadow-xl">
+        <div class="p-5 bg-[#061122] border-b border-defense-border flex items-center justify-between font-mono text-xs">
+          <span class="font-bold text-white flex items-center gap-2">
+            <svg class="w-4 h-4 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+            ARCHITECTURAL BENCHMARK: ENERSIT LABS VS ALTERNATIVES
+          </span>
+          <span class="text-gray-400">DEFENSE EVALUATION MATRIX</span>
+        </div>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-xs">
+            <thead>
+              <tr class="border-b border-defense-border bg-defense-dark/60 text-gray-400 uppercase text-[11px]">
+                <th class="p-4">Capability &amp; Metric</th>
+                <th class="p-4 text-cyan font-bold bg-cyan-950/20">Enersit Labs Sovereign RAG</th>
+                <th class="p-4 text-gray-400">Cloud AI (OpenAI / Claude)</th>
+                <th class="p-4 text-gray-400">Generic Local LLMs</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-defense-border">
+              <tr>
+                <td class="p-4 text-white font-semibold">Data Sovereignty &amp; Air-Gap</td>
+                <td class="p-4 text-emerald font-bold bg-cyan-950/10">&check; 100% Offline (Local CUDA)</td>
+                <td class="p-4 text-red-400">&times; Banned (Public Cloud US Servers)</td>
+                <td class="p-4 text-yellow-400">&sim; Offline (Requires Complex Setup)</td>
+              </tr>
+              <tr>
+                <td class="p-4 text-white font-semibold">Hardware Footprint</td>
+                <td class="p-4 text-emerald font-bold bg-cyan-950/10">&check; 3.6 GB VRAM (GTX 1650 Edge)</td>
+                <td class="p-4 text-gray-400">N/A (Massive Data Center Cloud)</td>
+                <td class="p-4 text-red-400">&times; 16GB - 48GB VRAM Required</td>
+              </tr>
+              <tr>
+                <td class="p-4 text-white font-semibold">Claim Audit &amp; Hallucination</td>
+                <td class="p-4 text-emerald font-bold bg-cyan-950/10">&check; 0.0% (Automated Ground-Truth OCR)</td>
+                <td class="p-4 text-red-400">&times; Frequent Unverified Hallucinations</td>
+                <td class="p-4 text-red-400">&times; No Line-by-Line Fact Audit</td>
+              </tr>
+              <tr>
+                <td class="p-4 text-white font-semibold">Tactical Document Synthesis</td>
+                <td class="p-4 text-emerald font-bold bg-cyan-950/10">&check; Hybrid BM25 + Dense Vectors</td>
+                <td class="p-4 text-yellow-400">&sim; Dense Vector Only (Misses Codes)</td>
+                <td class="p-4 text-yellow-400">&sim; Basic Text Splitting</td>
+              </tr>
+              <tr>
+                <td class="p-4 text-white font-semibold">National Security Compliance</td>
+                <td class="p-4 text-emerald font-bold bg-cyan-950/10">&check; CERT-In VAPT Audit Ready</td>
+                <td class="p-4 text-red-400">&times; Non-Compliant with Indian MoD</td>
+                <td class="p-4 text-yellow-400">&sim; Unaudited Community Scripts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Strategic Customer Sectors -->
+  <section id="sectors" class="py-24 relative border-b border-defense-border bg-[#030914]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-block text-xs font-mono uppercase tracking-widest text-emerald mb-3 px-3 py-1 bg-emerald-950/30 border border-emerald-500/30 rounded">
+          B2G &amp; Strategic Enterprise
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          Mission-Critical Target Verticals
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Designed specifically to comply with sovereign mandates, security clearances, and operational protocols of national defense and critical infrastructure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Sector 1 -->
+        <div class="sector-card p-6 rounded-xl border border-defense-border bg-defense-card hover:border-cyan transition-all">
+          <div class="w-12 h-12 rounded-lg bg-cyan-950/40 border border-cyan/40 flex items-center justify-center text-cyan mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <span class="text-xs font-mono text-cyan tracking-wider uppercase">Strategic Segment 01</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-2">Defense &amp; Military</h3>
+          <p class="text-xs font-mono text-gray-400 mb-4">Indian Army &bull; Indian Navy &bull; Air Force &bull; DRDO</p>
+          <div class="text-xs text-gray-300 space-y-2 border-t border-defense-border pt-4">
+            <div><strong>Operational Use Case:</strong></div>
+            <p class="text-gray-400 leading-relaxed">
+              Tactical document synthesis, mission-critical field intelligence retrieval, and offline record search in forward border deployments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sector 2 -->
+        <div class="sector-card p-6 rounded-xl border border-defense-border bg-defense-card hover:border-cyan transition-all">
+          <div class="w-12 h-12 rounded-lg bg-cyan-950/40 border border-cyan/40 flex items-center justify-center text-cyan mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <span class="text-xs font-mono text-cyan tracking-wider uppercase">Strategic Segment 02</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-2">Intelligence Agencies</h3>
+          <p class="text-xs font-mono text-gray-400 mb-4">IB &bull; RAW &bull; NTRO &bull; State Police Cyber Cells</p>
+          <div class="text-xs text-gray-300 space-y-2 border-t border-defense-border pt-4">
+            <div><strong>Operational Use Case:</strong></div>
+            <p class="text-gray-400 leading-relaxed">
+              Open-Source Intelligence (OSINT) threat monitoring, suspect entity relationship graph linking, and automated claim verification.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sector 3 -->
+        <div class="sector-card p-6 rounded-xl border border-defense-border bg-defense-card hover:border-cyan transition-all">
+          <div class="w-12 h-12 rounded-lg bg-cyan-950/40 border border-cyan/40 flex items-center justify-center text-cyan mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          </div>
+          <span class="text-xs font-mono text-cyan tracking-wider uppercase">Strategic Segment 03</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-2">Government Ministries</h3>
+          <p class="text-xs font-mono text-gray-400 mb-4">Ministry of Home Affairs &bull; MEA &bull; NDMA</p>
+          <div class="text-xs text-gray-300 space-y-2 border-t border-defense-border pt-4">
+            <div><strong>Operational Use Case:</strong></div>
+            <p class="text-gray-400 leading-relaxed">
+              Geopolitical threat velocity tracking, rapid policy decision support, and multi-department disaster intelligence coordination.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sector 4 -->
+        <div class="sector-card p-6 rounded-xl border border-defense-border bg-defense-card hover:border-cyan transition-all">
+          <div class="w-12 h-12 rounded-lg bg-cyan-950/40 border border-cyan/40 flex items-center justify-center text-cyan mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          </div>
+          <span class="text-xs font-mono text-cyan tracking-wider uppercase">Strategic Segment 04</span>
+          <h3 class="font-heading text-xl font-bold text-white mt-1 mb-2">Critical Enterprise</h3>
+          <p class="text-xs font-mono text-gray-400 mb-4">Defense PSUs (BEL, HAL) &bull; Energy Grid &bull; Banks</p>
+          <div class="text-xs text-gray-300 space-y-2 border-t border-defense-border pt-4">
+            <div><strong>Operational Use Case:</strong></div>
+            <p class="text-gray-400 leading-relaxed">
+              Internal threat forensics, financial fraud pattern discovery, and air-gapped confidential document RAG search without cloud egress.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Market Opportunity & Business Model -->
+  <section id="market" class="py-24 relative border-b border-defense-border bg-defense-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
+        
+        <!-- Market Opportunity Stats (TAM / SAM) -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-block text-xs font-mono uppercase tracking-widest text-cyan px-3 py-1 bg-cyan-950/30 border border-cyan/30 rounded">
+            Market Opportunity (TAM / SAM)
+          </div>
+          <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Massive Headroom Driven by 'Make in India' &amp; iDEX
+          </h2>
+          <p class="text-gray-400 text-base leading-relaxed">
+            National security mandates require sovereign, non-cloud software stacks. Defense modernization budgets are rapidly shifting from foreign imports to indigenous deep-tech AI.
+          </p>
+
+          <div class="grid grid-cols-3 gap-4 pt-4">
+            <div class="p-4 rounded-xl border border-defense-border bg-defense-card">
+              <div class="font-heading text-2xl sm:text-3xl font-bold text-cyan">$35B+</div>
+              <div class="text-xs font-mono text-gray-300 mt-1">Global Defense AI</div>
+              <div class="text-[11px] text-gray-500 mt-1">20.4% CAGR to 2030</div>
+            </div>
+            <div class="p-4 rounded-xl border border-defense-border bg-defense-card">
+              <div class="font-heading text-2xl sm:text-3xl font-bold text-emerald">$3.2B</div>
+              <div class="text-xs font-mono text-gray-300 mt-1">India GovTech TAM</div>
+              <div class="text-[11px] text-gray-500 mt-1">Defense &amp; Police Units</div>
+            </div>
+            <div class="p-4 rounded-xl border border-defense-border bg-defense-card">
+              <div class="font-heading text-2xl sm:text-3xl font-bold text-purple-400">$500M</div>
+              <div class="text-xs font-mono text-gray-300 mt-1">Serviceable SAM</div>
+              <div class="text-[11px] text-gray-500 mt-1">Indian Security Units</div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-[#051122] border border-defense-border font-mono text-xs text-gray-300 space-y-2">
+            <div class="text-cyan font-bold uppercase">&bull; Regulatory Growth Tailwinds:</div>
+            <ul class="space-y-1.5 text-gray-400 text-[11px]">
+              <li>&check; Mandated data localization in military IT infrastructure</li>
+              <li>&check; Ministry of Defense zero-trust cloud bans across intelligence units</li>
+              <li>&check; Dedicated defense modernization allocations under iDEX &amp; DRDO TDF</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Monetization Streams (Direct from Pitch Deck Slide 7) -->
+        <div class="lg:col-span-6 space-y-4">
+          <div class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-2">COMMERCIAL MONETIZATION MODEL</div>
+          
+          <div class="p-5 rounded-xl border border-defense-border bg-defense-card flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-cyan-950/50 border border-cyan/40 flex items-center justify-center text-cyan shrink-0 font-mono font-bold">01</div>
+            <div>
+              <h3 class="font-heading text-base font-bold text-white">On-Premise Node Licenses</h3>
+              <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                Recurring annual software license charged per deployed edge GPU node / server core across military command headquarters and police cyber cells.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl border border-defense-border bg-defense-card flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-emerald-950/50 border border-emerald/40 flex items-center justify-center text-emerald shrink-0 font-mono font-bold">02</div>
+            <div>
+              <h3 class="font-heading text-base font-bold text-white">Custom Integration &amp; LoRA Tuning</h3>
+              <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                One-time deployment fees for custom military domain LoRA adapter training, internal classified database connectors, and secure air-gap staging.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl border border-defense-border bg-defense-card flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-purple-950/50 border border-purple-400/40 flex items-center justify-center text-purple-400 shrink-0 font-mono font-bold">03</div>
+            <div>
+              <h3 class="font-heading text-base font-bold text-white">Annual Maintenance Contracts (AMC: 15-20%)</h3>
+              <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                Recurring annual maintenance contracts covering ongoing CERT-In security compliance audits, model weight updates, and tactical hardware patches.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl border border-defense-border bg-defense-card flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-amber-950/50 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0 font-mono font-bold">04</div>
+            <div>
+              <h3 class="font-heading text-base font-bold text-white">Sovereign Enterprise SaaS</h3>
+              <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                Tiered subscription model for private defense contractors, national energy grids, and banking fraud investigation units.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Founder Leadership & Credentials -->
+  <section id="founder" class="py-24 relative border-b border-defense-border bg-[#020712]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-block text-xs font-mono uppercase tracking-widest text-cyan mb-3 px-3 py-1 bg-cyan-950/30 border border-cyan/30 rounded">
+          Execution Track Record
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          Leadership &amp; Technical Pedigree
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Combining elite engineering rigor (IIT Patna, IIIT-B, Symbiosis) with commercial scale cloud leadership at Airtel Digital.
+        </p>
+      </div>
+
+      <div class="p-8 sm:p-12 rounded-2xl border border-defense-border bg-defense-card/70 backdrop-blur-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Founder Image & Quick Stats -->
+          <div class="lg:col-span-4 text-center lg:text-left">
+            <div class="relative inline-block mx-auto lg:mx-0 mb-6">
+              <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-cyan/60 shadow-glow-cyan p-1 bg-defense-dark">
+                <img src="assets/images/founder.jpg" alt="Rut Patel - Founder & CEO of Enersit Labs" class="w-full h-full object-cover rounded-xl filter contrast-110">
+              </div>
+              <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 lg:left-8 lg:translate-x-0 bg-defense-dark border border-emerald/50 px-3 py-1 rounded-full font-mono text-[10px] text-emerald flex items-center gap-1.5 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-emerald"></span>
+                <span>IIT PATNA &bull; 9.3 CGPA</span>
+              </div>
+            </div>
+
+            <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white">Rut Patel</h3>
+            <div class="text-cyan font-mono text-sm tracking-wider mt-1">Founder &amp; CEO, Enersit Labs</div>
+            <div class="text-xs text-gray-400 font-mono mt-1">Palanpur, Gujarat, India</div>
+
+            <!-- Social / HuggingFace Badges -->
+            <div class="flex items-center justify-center lg:justify-start gap-3 mt-5">
+              <a href="https://huggingface.co/ProfRutPatel" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-defense-dark border border-defense-border hover:border-cyan text-xs font-mono text-gray-300 flex items-center gap-1.5 transition-colors">
+                <span>🤗</span>
+                <span>ProfRutPatel</span>
+              </a>
+              <a href="https://github.com/profrutpatel" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-defense-dark border border-defense-border hover:border-cyan text-xs font-mono text-gray-300 flex items-center gap-1.5 transition-colors">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Academic & Professional Background -->
+          <div class="lg:col-span-8 space-y-6">
+            
+            <div>
+              <h4 class="text-xs font-mono uppercase tracking-widest text-gray-400 mb-3">Academic Excellence</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="text-xs font-bold text-white">M.Tech &bull; IIT Patna</div>
+                  <div class="text-[11px] text-cyan font-mono">Indian Institute of Technology (9.3 CGPA)</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="text-xs font-bold text-white">MBA Data Science &bull; SCIT Pune</div>
+                  <div class="text-[11px] text-gray-400 font-mono">Symbiosis International University</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="text-xs font-bold text-white">Executive PG Cybersecurity &bull; IIIT Bangalore</div>
+                  <div class="text-[11px] text-gray-400 font-mono">IIIT-B Advanced Cybersecurity Program</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="text-xs font-bold text-white">B.Tech Mechanical &bull; Ganpat Univ</div>
+                  <div class="text-[11px] text-gray-400 font-mono">Robotics, Controls &amp; Automation</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="text-xs font-mono uppercase tracking-widest text-gray-400 mb-3">Industry Leadership Experience</h4>
+              <div class="space-y-3">
+                
+                <div class="p-4 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-xs font-bold text-white">Digital Product Manager - Airtel Cloud</span>
+                    <span class="text-[10px] font-mono text-cyan bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan/30">Airtel Digital &bull; 2023–2025</span>
+                  </div>
+                  <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                    Managed core cloud product lifecycle and edge compute services for enterprise B2B clients. Spearheaded internal AI automation and collaborated with engineering and cloud security teams.
+                  </p>
+                </div>
+
+                <div class="p-4 rounded-lg bg-defense-dark border border-defense-border">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-xs font-bold text-white">Stealth AI Venture Lead - SCIE Incubator</span>
+                    <span class="text-[10px] font-mono text-purple-400 bg-purple-950/40 px-2 py-0.5 rounded border border-purple-500/30">SCIE Pune &bull; 2021–2023</span>
+                  </div>
+                  <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                    Incubated stealth AI venture at Symbiosis Centre for Innovation &amp; Entrepreneurship; developed RAG pipelines and pitched to venture capital funds.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Credentials & Domain Badges -->
+            <div class="border-t border-defense-border pt-4">
+              <div class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-2">Executive Certifications &amp; Accreditations</div>
+              <div class="flex flex-wrap gap-2 text-[11px] font-mono">
+                <span class="px-2.5 py-1 rounded bg-defense-dark border border-defense-border text-gray-300">&bull; Microsoft AI Product Manager</span>
+                <span class="px-2.5 py-1 rounded bg-defense-dark border border-defense-border text-gray-300">&bull; UPenn Law: Intellectual Property</span>
+                <span class="px-2.5 py-1 rounded bg-defense-dark border border-defense-border text-gray-300">&bull; Wharton Online: Entrepreneurship</span>
+                <span class="px-2.5 py-1 rounded bg-defense-dark border border-emerald-500/30 text-emerald">&bull; MSME Udyam Certified</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 12-Month Roadmap & GENESIS EIR Grant Fund Utilization -->
+  <section id="roadmap" class="py-24 relative border-b border-defense-border bg-defense-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-block text-xs font-mono uppercase tracking-widest text-emerald mb-3 px-3 py-1 bg-emerald-950/30 border border-emerald-500/30 rounded">
+          GENESIS EIR Grant Allocation &bull; &#8377;7,00,000 Budget
+        </div>
+        <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          12-Month Execution Roadmap
+        </h2>
+        <p class="text-gray-400 text-base sm:text-lg">
+          Structured capital deployment transitioning Enersit Labs from an MSME into a defense-grade Private Limited entity with verified CERT-In clearance and state police field PoCs.
+        </p>
+      </div>
+
+      <!-- 4 Quarters Timeline (Direct from Fund Utilization Plan) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        
+        <div class="p-6 rounded-xl border border-defense-border bg-defense-card relative">
+          <div class="text-xs font-mono text-cyan mb-2">Q1: MONTHS 1–3</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Incorporation &amp; Setup</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-start gap-2"><span class="text-cyan">&bull;</span> Complete Pvt Ltd corporate restructuring</li>
+            <li class="flex items-start gap-2"><span class="text-cyan">&bull;</span> Founder IP assignment agreements</li>
+            <li class="flex items-start gap-2"><span class="text-cyan">&bull;</span> Procure dedicated CUDA edge testbed</li>
+            <li class="flex items-start gap-2"><span class="text-cyan">&bull;</span> Finalize core offline RAG engine v2.0</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-xl border border-defense-border bg-defense-card relative">
+          <div class="text-xs font-mono text-emerald mb-2">Q2: MONTHS 4–6</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">VAPT &amp; GeM Listing</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-start gap-2"><span class="text-emerald">&bull;</span> Conduct CERT-In VAPT security audit</li>
+            <li class="flex items-start gap-2"><span class="text-emerald">&bull;</span> Onboard Enersit Labs on GeM portal</li>
+            <li class="flex items-start gap-2"><span class="text-emerald">&bull;</span> Submit proposal for iDEX defense challenges</li>
+            <li class="flex items-start gap-2"><span class="text-emerald">&bull;</span> Zero-trust security compliance sign-off</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-xl border border-defense-border bg-defense-card relative">
+          <div class="text-xs font-mono text-purple-400 mb-2">Q3: MONTHS 7–9</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Police Cyber PoCs</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-start gap-2"><span class="text-purple-400">&bull;</span> Deploy 2 operational pilot PoCs</li>
+            <li class="flex items-start gap-2"><span class="text-purple-400">&bull;</span> Stage on State Police Cyber Cell archives</li>
+            <li class="flex items-start gap-2"><span class="text-purple-400">&bull;</span> Benchmark multi-GPU VRAM throughput</li>
+            <li class="flex items-start gap-2"><span class="text-purple-400">&bull;</span> Document zero-hallucination metrics</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-xl border border-defense-border bg-defense-card relative">
+          <div class="text-xs font-mono text-amber-400 mb-2">Q4: MONTHS 10–12</div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Procurement Bidding</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-start gap-2"><span class="text-amber-400">&bull;</span> Co-bidding alliances with Defense PSUs (BEL, ECIL)</li>
+            <li class="flex items-start gap-2"><span class="text-amber-400">&bull;</span> Tier-1 SI partnerships (L&amp;T, Tata)</li>
+            <li class="flex items-start gap-2"><span class="text-amber-400">&bull;</span> Secure first paid annual software license</li>
+            <li class="flex items-start gap-2"><span class="text-amber-400">&bull;</span> Expansion to critical banking/energy grid</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Fund Utilization Breakdown Table (Exact PDF Data) -->
+      <div class="p-6 sm:p-8 rounded-2xl border border-defense-border bg-defense-card/90">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="font-heading text-xl font-bold text-white">GENESIS EIR Grant: Detailed Budget Breakdown</h3>
+            <div class="text-xs font-mono text-gray-400 mt-1">Total Grant Request: &#8377;7,00,000 &bull; Duration: 12 Months</div>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 rounded bg-cyan-950/40 border border-cyan/40 text-cyan">
+            Auditable Deployment Plan
+          </span>
+        </div>
+
+        <div class="space-y-4 font-mono text-xs">
+          
+          <div>
+            <div class="flex justify-between mb-1.5">
+              <span class="text-gray-300">Edge GPU Compute &amp; Dedicated CUDA Testbed Hardware</span>
+              <span class="text-cyan font-bold">40% &bull; &#8377;2,80,000</span>
+            </div>
+            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-cyan h-full rounded-full" style="width: 40%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-400 mt-1">Procurement of dedicated CUDA GPU acceleration nodes (RTX/A-series), NVMe vector storage, air-gap power unit.</div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1.5">
+              <span class="text-gray-300">Pvt Ltd Entity Formalization &amp; Legal IP Assignment</span>
+              <span class="text-emerald font-bold">30% &bull; &#8377;2,10,000</span>
+            </div>
+            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-emerald h-full rounded-full" style="width: 30%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-400 mt-1">MCA incorporation fees, MOA/AOA drafting, Founder IP assignment agreements, Trademark filing for Enersit Labs.</div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1.5">
+              <span class="text-gray-300">CERT-In Security &amp; VAPT Audit Readiness</span>
+              <span class="text-purple-400 font-bold">15% &bull; &#8377;1,05,000</span>
+            </div>
+            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-purple-400 h-full rounded-full" style="width: 15%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-400 mt-1">Vulnerability Assessment &amp; Penetration Testing (VAPT) by CERT-In empaneled auditor for air-gapped defense compliance.</div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1.5">
+              <span class="text-gray-300">Field Trials &amp; Police / Defense PoC Demonstrations</span>
+              <span class="text-amber-400 font-bold">10% &bull; &#8377;70,000</span>
+            </div>
+            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-amber-400 h-full rounded-full" style="width: 10%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-400 mt-1">Operational transit, secure hardware transit, and staging costs for live pilot demonstrations with State Police Cyber Cells.</div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1.5">
+              <span class="text-gray-300">Operational Contingency &amp; Non-Classified Cloud Sandbox</span>
+              <span class="text-gray-400 font-bold">5% &bull; &#8377;35,000</span>
+            </div>
+            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-gray-500 h-full rounded-full" style="width: 5%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-400 mt-1">Cloud testing sandbox for public open datasets, domain &amp; SSL infrastructure, and admin overhead.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact & Tactical Briefing Request -->
+  <section id="contact" class="py-24 relative border-b border-defense-border bg-[#030914]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Contact Coordinates -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-block text-xs font-mono uppercase tracking-widest text-cyan px-3 py-1 bg-cyan-950/30 border border-cyan/30 rounded">
+            Confidential Inquiry
+          </div>
+          <h2 class="font-heading text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Partner With Enersit Labs
+          </h2>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Whether you represent a defense force command, intelligence wing, state police cyber cell, or tier-1 defense system integrator, our team is ready for classified PoC discussions.
+          </p>
+
+          <div class="space-y-4 pt-4 font-mono text-xs">
+            <div class="p-4 rounded-lg bg-defense-card border border-defense-border flex items-start gap-4">
+              <div class="w-8 h-8 rounded bg-cyan-950/50 border border-cyan/40 flex items-center justify-center text-cyan shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div>
+                <div class="text-gray-500 uppercase text-[10px]">Official Communication</div>
+                <a href="mailto:rutpatelscitpune@gmail.com" class="text-white hover:text-cyan font-bold">rutpatelscitpune@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-lg bg-defense-card border border-defense-border flex items-start gap-4">
+              <div class="w-8 h-8 rounded bg-emerald-950/50 border border-emerald/40 flex items-center justify-center text-emerald shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <div class="text-gray-500 uppercase text-[10px]">Direct Operational Phone</div>
+                <a href="tel:+917990898016" class="text-white hover:text-emerald font-bold">+91 7990898016</a>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-lg bg-defense-card border border-defense-border flex items-start gap-4">
+              <div class="w-8 h-8 rounded bg-purple-950/50 border border-purple-400/40 flex items-center justify-center text-purple-400 shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div>
+                <div class="text-gray-500 uppercase text-[10px]">Headquarters</div>
+                <div class="text-white font-bold">Palanpur, Gujarat, India</div>
+                <div class="text-gray-500 text-[11px]">MSME Registered Entity</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tactical Request Form -->
+        <div class="lg:col-span-7">
+          <div class="p-8 rounded-2xl border border-defense-border bg-defense-card/80 backdrop-blur-xl">
+            <h3 class="font-heading text-xl font-bold text-white mb-2">Request Classified Briefing / PoC Pilot</h3>
+            <p class="text-xs font-mono text-gray-400 mb-6">All submissions are processed under strict commercial NDA protocols.</p>
+
+            <form id="contactForm" class="space-y-4 font-mono text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-400 mb-1.5 uppercase text-[11px]">Representative Name *</label>
+                  <input type="text" required placeholder="Col. Rajesh Sharma / Dir. R. Patel" class="w-full bg-defense-dark border border-defense-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan">
+                </div>
+                <div>
+                  <label class="block text-gray-400 mb-1.5 uppercase text-[11px]">Official Email *</label>
+                  <input type="email" required placeholder="name@gov.in / name@agency.org" class="w-full bg-defense-dark border border-defense-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-400 mb-1.5 uppercase text-[11px]">Organization / Agency *</label>
+                  <input type="text" required placeholder="Indian Army / DRDO / Police Cyber Cell" class="w-full bg-defense-dark border border-defense-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan">
+                </div>
+                <div>
+                  <label class="block text-gray-400 mb-1.5 uppercase text-[11px]">Tactical Domain</label>
+                  <select class="w-full bg-defense-dark border border-defense-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan">
+                    <option>Defense / Armed Forces</option>
+                    <option>Intelligence / OSINT Analysis</option>
+                    <option>Police Cyber Cell Investigation</option>
+                    <option>Defense PSU / System Integrator</option>
+                    <option>Critical National Infrastructure</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-gray-400 mb-1.5 uppercase text-[11px]">Hardware &amp; Operational Scope</label>
+                <textarea rows="3" placeholder="Specify your desired air-gap requirements, on-prem GPU specs (e.g. GTX/RTX/A-Series), or tactical PoC objectives..." class="w-full bg-defense-dark border border-defense-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan"></textarea>
+              </div>
+
+              <div class="flex items-center justify-between pt-2">
+                <div class="flex items-center gap-2 text-[10px] text-gray-500">
+                  <span class="w-2 h-2 rounded-full bg-emerald"></span>
+                  <span>CONFIDENTIAL &bull; ZERO-CLOUD GUARANTEE</span>
+                </div>
+                <button type="submit" class="btn-primary font-mono font-bold uppercase tracking-wider px-6 py-3 rounded-lg text-xs flex items-center gap-2">
+                  <span>Transmit Request</span>
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </form>
+
+            <div id="formSuccessToast" class="hidden mt-4 p-3.5 rounded-lg bg-emerald-950/40 border border-emerald-500/50 text-emerald text-xs font-mono">
+              &check; Briefing inquiry received. Our technical team will reach out via authorized channels within 24 operational hours.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#02050b] border-t border-defense-border py-12 font-mono text-xs text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-defense-border">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded bg-cyan-950/40 border border-cyan/40 flex items-center justify-center text-cyan">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+          </div>
+          <div>
+            <span class="font-heading font-bold text-white text-base tracking-wider">ENERSIT LABS</span>
+            <div class="text-[10px] text-gray-500">Sovereign Defense AI &bull; Palanpur, Gujarat, India</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 text-[11px] uppercase">
+          <a href="#problem" class="hover:text-cyan">Vulnerabilities</a>
+          <a href="#platform" class="hover:text-cyan">Tactical Console</a>
+          <a href="#technology" class="hover:text-cyan">Architecture</a>
+          <a href="#founder" class="hover:text-cyan">Founder</a>
+          <a href="#roadmap" class="hover:text-cyan">Milestones</a>
+          <a href="#contact" class="hover:text-cyan">Contact</a>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
+        <div>
+          &copy; 2025–2026 Enersit Labs. All rights reserved. MSME Registered Entity.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>CERT-In VAPT Audit Pipeline</span>
+          <span>&bull;</span>
+          <span>Air-Gapped Sovereign AI</span>
+          <span>&bull;</span>
+          <span>GeM &amp; iDEX Ready</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
