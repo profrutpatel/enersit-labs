@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enersit Labs: Sovereign Defense AI | Investor Pitch</title>
+  <meta name="description" content="Enersit Labs - Building Air-Gapped, GPU-Accelerated RAG and Tactical Intelligence Platforms for Sovereign Government Operations, Intelligence Agencies, and Defense Forces." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-dark: #0a0c0f;
+      --bg-card: #111418;
+      --bg-card2: #161b22;
+      --border: #2a3040;
+      --accent: #2ec4b6;
+      --accent2: #4ade80;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --font-mono: "Share Tech Mono", monospace;
+      --font-display: "Orbitron", sans-serif;
+      --font-body: "Inter", sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-dark); color: var(--text); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
+    body::before { content:""; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 9999; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 14px 40px; background: rgba(10,12,15,0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-status { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent2); letter-spacing: 1px; }
+
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px; position: relative; }
+    section + section { border-top: 1px solid var(--border); }
+    .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(46,196,182,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(46,196,182,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+
+    /* HERO */
+    #hero { align-items: center; text-align: center; background: radial-gradient(ellipse at 50% 40%, #0f2027 0%, var(--bg-dark) 70%); }
+    .hero-inner { border: 1px solid var(--border); border-radius: 12px; padding: 60px 80px; background: rgba(17,20,24,0.7); backdrop-filter: blur(8px); max-width: 900px; width: 100%; position: relative; }
+    .hero-inner::before { content:""; position: absolute; inset: -1px; border-radius: 12px; background: linear-gradient(135deg, rgba(46,196,182,0.13), transparent 60%); pointer-events: none; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; color: #fff; margin-bottom: 20px; line-height: 1.1; letter-spacing: 1px; }
+    .hero-subtitle { font-size: clamp(1rem,2.5vw,1.35rem); color: var(--text-dim); margin-bottom: 36px; font-weight: 300; }
+    .hero-subtitle strong { color: #fff; font-weight: 700; }
+    .mission-box { border: 1px solid var(--accent); border-radius: 8px; padding: 22px 32px; background: rgba(46,196,182,0.07); text-align: left; }
+    .mission-label { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; margin-bottom: 6px; }
+    .mission-text { font-size: 1.05rem; color: var(--text); }
+    .sys-status { position: absolute; bottom: -1px; left: -1px; border: 1px solid var(--border); border-radius: 0 0 0 12px; background: var(--bg-card); padding: 12px 20px; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); line-height: 1.8; }
+
+    /* SLIDE COMMON */
+    .slide-title { font-family: var(--font-mono); font-size: clamp(1.3rem,3vw,2.2rem); color: #fff; margin-bottom: 10px; letter-spacing: 1px; }
+    .slide-subtitle { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; letter-spacing: 1px; }
+
+    /* PROBLEM */
+    .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .problem-card { border: 1px solid var(--border); border-radius: 10px; padding: 36px 28px; background: var(--bg-card); display: flex; flex-direction: column; gap: 18px; transition: border-color 0.3s, transform 0.3s; }
+    .problem-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .problem-icon { font-size: 3rem; text-align: center; }
+    .problem-name { font-family: var(--font-mono); font-size: 1.3rem; color: #fff; text-align: center; }
+    .problem-desc { font-size: 0.85rem; color: var(--text-dim); font-family: var(--font-mono); line-height: 1.7; }
+
+    /* SOLUTION */
+    .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .solution-card { border: 1px solid var(--border); border-radius: 10px; padding: 28px; background: var(--bg-card); display: flex; gap: 20px; align-items: flex-start; transition: border-color 0.3s; }
+    .solution-card:hover { border-color: var(--accent); }
+    .solution-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .solution-name { font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 10px; }
+    .solution-desc { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; }
+    .solution-badge { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent); background: rgba(46,196,182,0.1); border: 1px solid var(--accent); border-radius: 4px; padding: 2px 8px; display: inline-block; margin-top: 8px; letter-spacing: 1px; }
+
+    /* VRAM */
+    #vram { background: #0b0d10; }
+    .vram-layout { display: grid; grid-template-columns: 220px 1fr 220px; gap: 20px; align-items: start; }
+    .vram-box { border: 1px solid var(--border); border-radius: 8px; padding: 20px; background: var(--bg-card); font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-dim); line-height: 1.7; }
+    .vram-box-title { color: #fff; font-size: 0.88rem; margin-bottom: 10px; }
+    .terminal { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #0d1117; }
+    .terminal-bar { background: #1c2128; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); display: flex; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+    .terminal-bar .hi { color: var(--accent2); }
+    .terminal-bar .acc { color: var(--accent); }
+    .terminal-cols { display: grid; grid-template-columns: 1fr 2fr 1fr; }
+    .t-col { padding: 14px; border-right: 1px solid var(--border); }
+    .t-col:last-child { border-right: none; }
+    .t-col-title { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
+    .t-menu { list-style: none; }
+    .t-menu li { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); padding: 5px 8px; border-radius: 4px; }
+    .t-menu li.active { background: rgba(46,196,182,0.1); color: var(--accent); border-left: 2px solid var(--accent); }
+    .query-box { font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-dim); background: #111; border: 1px solid var(--border); border-radius: 4px; padding: 7px 10px; margin-bottom: 10px; }
+    .graph-viz { background: #0a0c0f; border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-dim); text-align: center; min-height: 75px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
+    .graph-node-chain { display: flex; align-items: center; gap: 4px; font-size: 0.56rem; flex-wrap: wrap; justify-content: center; }
+    .gn { border: 1px solid var(--accent); border-radius: 4px; padding: 2px 5px; color: var(--accent); }
+    .ga { color: var(--text-dim); }
+    .confidence-bar { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent2); padding: 6px 0; text-align: center; }
+    .fact-audit { background: rgba(74,222,128,0.05); border: 1px solid var(--accent2); border-radius: 6px; padding: 10px; font-family: var(--font-mono); font-size: 0.66rem; }
+    .fact-audit-title { color: var(--accent2); margin-bottom: 6px; }
+    .fact-audit ul { list-style: none; }
+    .fact-audit li { color: var(--text-dim); margin-bottom: 3px; }
+    .vram-stat { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); margin-bottom: 5px; }
+    .vram-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+    .vram-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; }
+    .query-latency { border: 1px solid var(--border); border-radius: 8px; padding: 16px 26px; background: var(--bg-card); margin-top: 20px; text-align: center; font-family: var(--font-mono); }
+    .ql-title { font-size: 0.95rem; color: #fff; margin-bottom: 5px; }
+    .ql-value { font-size: 0.78rem; color: var(--text-dim); }
+
+    /* MATRIX */
+    #matrix { background: var(--bg-dark); }
+    .matrix-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .matrix-table th, .matrix-table td { padding: 16px 18px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.78rem; text-align: center; }
+    .matrix-table th { background: var(--bg-card2); color: var(--text-dim); font-weight: 400; }
+    .matrix-table th.hi { background: rgba(46,196,182,0.12); color: var(--accent); border-color: var(--accent); }
+    .matrix-table td { background: var(--bg-card); color: var(--text-dim); }
+    .matrix-table td:first-child { text-align: left; color: #fff; }
+    .matrix-table td.enersit { background: rgba(46,196,182,0.07); border-color: rgba(46,196,182,0.5); }
+    .pass { color: var(--accent2); font-weight: 600; }
+    .fail { color: var(--accent-red); }
+    .warn { color: var(--accent-orange); }
+
+    /* MARKET */
+    #market { background: var(--bg-dark); }
+    .market-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .market-circles { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1; margin: 0 auto; }
+    .circle-ring { position: absolute; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-mono); }
+    .cr-outer { inset: 0; background: rgba(46,196,182,0.02); }
+    .cr-mid { inset: 15%; background: rgba(46,196,182,0.04); border-color: rgba(46,196,182,0.3); }
+    .cr-inner { inset: 33%; background: rgba(46,196,182,0.15); border-color: var(--accent); }
+    .cr-text-outer { position: absolute; top: 4%; width: 100%; font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-dim); text-align: center; }
+    .cr-text-mid { position: absolute; top: 20%; width: 100%; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text); text-align: center; }
+    .cr-inner-text { color: var(--accent); font-size: 0.64rem; line-height: 1.5; }
+    .node-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .node-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; background: var(--bg-card); font-family: var(--font-mono); font-size: 0.73rem; transition: border-color 0.3s; }
+    .node-card:hover { border-color: var(--accent); }
+    .node-label { font-size: 0.56rem; color: var(--text-dim); margin-bottom: 5px; letter-spacing: 1px; }
+    .node-name { color: var(--accent); font-size: 0.8rem; margin-bottom: 7px; }
+    .node-desc { color: var(--text-dim); line-height: 1.6; }
+
+    /* MONETIZATION */
+    #monetization { background: #0b0d10; }
+    .mono-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .mono-section { border: 1px solid var(--border); border-radius: 10px; padding: 28px; background: var(--bg-card); }
+    .mono-title { font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 22px; }
+    .revenue-item { border: 1px solid var(--accent); border-radius: 6px; padding: 12px 16px; background: rgba(46,196,182,0.06); font-family: var(--font-mono); font-size: 0.78rem; color: var(--text); margin-bottom: 10px; line-height: 1.5; }
+    .gtm-phases { display: flex; flex-direction: column; gap: 14px; }
+    .phase-item { display: flex; gap: 14px; align-items: flex-start; }
+    .phase-box { border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; background: var(--bg-card2); font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); min-width: 125px; text-align: center; }
+    .phase-desc { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); padding-top: 7px; line-height: 1.6; }
+
+    /* LEADERSHIP */
+    #leadership { background: var(--bg-dark); }
+    .leader-layout { display: grid; grid-template-columns: 260px 1fr; gap: 28px; }
+    .leader-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-card); }
+    .leader-avatar { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, #1a2535, #0f1923); display: flex; align-items: center; justify-content: center; font-size: 5rem; border-bottom: 1px solid var(--border); }
+    .leader-status { padding: 11px 14px; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); border: 1px solid var(--border); margin: 10px; border-radius: 4px; }
+    .leader-details { display: flex; flex-direction: column; gap: 12px; }
+    .leader-section { border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; background: var(--bg-card); }
+    .leader-section-title { font-family: var(--font-mono); color: var(--accent); font-size: 0.8rem; margin-bottom: 10px; letter-spacing: 1px; }
+    .leader-list { list-style: none; }
+    .leader-list li { font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-dim); padding: 3px 0 3px 14px; position: relative; line-height: 1.6; }
+    .leader-list li::before { content: "- "; color: var(--accent2); position: absolute; left: 0; }
+
+    /* FUNDING */
+    #funding { background: #0b0d10; }
+    .funding-ask { font-family: var(--font-mono); color: var(--accent2); font-size: 0.95rem; margin-bottom: 32px; letter-spacing: 1px; }
+    .alloc-section { border: 1px solid var(--border); border-radius: 10px; padding: 24px; background: var(--bg-card); margin-bottom: 22px; }
+    .alloc-title { font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin-bottom: 20px; }
+    .alloc-dials { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .dial-card { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .dial-ring { position: relative; width: 108px; height: 108px; }
+    .dial-svg { width: 108px; height: 108px; transform: rotate(-90deg); }
+    .dial-bg { fill: none; stroke: var(--border); stroke-width: 8; }
+    .dial-fg { fill: none; stroke-width: 8; stroke-linecap: round; }
+    .dial-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-mono); }
+    .dial-amount { color: var(--accent); font-size: 0.9rem; font-weight: bold; }
+    .dial-pct { color: var(--text-dim); font-size: 0.62rem; }
+    .dial-desc { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); text-align: center; line-height: 1.6; }
+    .timeline-section { border: 1px solid var(--border); border-radius: 10px; padding: 24px; background: var(--bg-card); }
+    .timeline-title { font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin-bottom: 20px; }
+    .quarters { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .q-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px; background: var(--bg-card2); font-family: var(--font-mono); transition: border-color 0.3s; }
+    .q-card:hover { border-color: var(--accent); }
+    .q-label { font-size: 0.72rem; color: #fff; margin-bottom: 3px; }
+    .q-name { font-size: 0.65rem; color: var(--accent); margin-bottom: 9px; }
+    .q-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 9px; }
+    .q-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+    .q-desc { font-size: 0.63rem; color: var(--text-dim); line-height: 1.6; }
+
+    footer { padding: 32px 60px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-dim); }
+    .footer-logo { font-family: var(--font-display); color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      section { padding: 100px 20px 60px; }
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .problem-grid, .solution-grid, .vram-layout, .market-layout, .mono-layout, .leader-layout, .alloc-dials, .quarters { grid-template-columns: 1fr; }
+      .node-cards { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ENERSIT LABS</div>
+  <ul class="nav-links">
+    <li><a href="#problem">PROBLEM</a></li>
+    <li><a href="#solution">SOLUTION</a></li>
+    <li><a href="#vram">PLATFORM</a></li>
+    <li><a href="#matrix">EDGE</a></li>
+    <li><a href="#market">MARKET</a></li>
+    <li><a href="#monetization">REVENUE</a></li>
+    <li><a href="#leadership">TEAM</a></li>
+    <li><a href="#funding">FUNDING</a></li>
+  </ul>
+  <div class="nav-status">STATUS: <span style="color:var(--accent2)">AIR-GAPPED</span></div>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<section id="hero" style="align-items:center;text-align:center;background:radial-gradient(ellipse at 50% 40%, #0f2027 0%, var(--bg-dark) 70%)">
+  <div class="grid-bg"></div>
+  <div class="hero-inner">
+    <h1 class="hero-title">Enersit Labs: Sovereign Defense AI</h1>
+    <p class="hero-subtitle">Building <strong>Air-Gapped</strong>, GPU-Accelerated RAG &amp; <strong>Tactical Intelligence</strong> Platforms.</p>
+    <div class="mission-box">
+      <div class="mission-label">Mission:</div>
+      <div class="mission-text">Sovereign Government Operations, Intelligence Agencies, and Defense Forces.</div>
+    </div>
+    <div class="sys-status">
+      SYSTEM STATUS: <span style="color:var(--accent2)">AIR-GAPPED</span><br>
+      CLEARANCE: AUTHORIZED B2G REVIEW ONLY<br>
+      COMMANDER: RUT PATEL
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: PROBLEM -->
+<section id="problem">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Standard Cloud AI Fails Defense Mandates</h2>
+  <p class="slide-subtitle reveal">Vulnerability Chain</p>
+  <div class="problem-grid">
+    <div class="problem-card reveal">
+      <div class="problem-icon">&#128421;</div>
+      <div class="problem-name">Fragmented Silos</div>
+      <div class="problem-desc"><span style="color:#f59e0b">Operational Delay:</span> Terabytes of unindexed daily scans and OSINT signals lead to hours lost manually linking threat entities.</div>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">&#9729;</div>
+      <div class="problem-name">Cloud Data Leaks</div>
+      <div class="problem-desc"><span style="color:#ef4444">Security Breach:</span> Relying on external SaaS APIs (OpenAI, Claude) violates strict defense air-gap policies and exposes classified intelligence.</div>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">&#128196;</div>
+      <div class="problem-name">AI Hallucinations</div>
+      <div class="problem-desc"><span style="color:#ef4444">Audit Failure:</span> Generic LLMs produce unverified facts with zero ground-truth audit trails, an unacceptable risk in tactical operations.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: SOLUTION -->
+<section id="solution">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">The Sovereign RAG Platform Architecture</h2>
+  <div style="height:24px"></div>
+  <div class="solution-grid">
+    <div class="solution-card reveal">
+      <div class="solution-icon">&#128274;</div>
+      <div>
+        <div class="solution-name">100% Air-Gapped</div>
+        <div class="solution-desc">Runs completely offline. Zero cloud telemetry. Guarantees absolute data sovereignty.</div>
+        <span class="solution-badge">ZERO CLOUD TELEMETRY</span>
+      </div>
+    </div>
+    <div class="solution-card reveal">
+      <div class="solution-icon">&#9889;</div>
+      <div>
+        <div class="solution-name">Multi-GPU Engine</div>
+        <div class="solution-desc">Custom PyTorch/CUDA engine running local open-source LLMs (Qwen3 + LoRA) on budget tactical edge hardware.</div>
+        <span class="solution-badge">GPU 1: 85% &middot; GPU 2: 70% &middot; GPU 3: 60%</span>
+      </div>
+    </div>
+    <div class="solution-card reveal">
+      <div class="solution-icon">&#128269;</div>
+      <div>
+        <div class="solution-name">Verified RAG Pipeline</div>
+        <div class="solution-desc">Fuses hybrid sparse/dense search (BM25 + vectors) with automated OCR to eliminate hallucinations.</div>
+        <span class="solution-badge">SPARSE/DENSE &middot; AUTOMATED OCR &middot; VERIFIED</span>
+      </div>
+    </div>
+    <div class="solution-card reveal">
+      <div class="solution-icon">&#128202;</div>
+      <div>
+        <div class="solution-name">Tactical Command UX</div>
+        <div class="solution-desc">Palantir-inspired analytics frontend tracking entity graphs and live threat trends.</div>
+        <span class="solution-badge">ENTITY GRAPHS &middot; LIVE THREAT TRENDS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: VRAM PARADIGM -->
+<section id="vram">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">The VRAM Paradigm: Tactical Edge Intelligence</h2>
+  <div style="height:24px"></div>
+  <div class="vram-layout reveal">
+    <div>
+      <div class="vram-box">
+        <div class="vram-box-title">Hardware Efficiency</div>
+        Executes parallel batch query inference across multi-model replicas on budget 4GB VRAM GPUs.
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span>ENERSIT LABS // SOVEREIGN INTELLIGENCE PLATFORM v2.0</span>
+        <span>| GPU: <span class="acc">GTX 1650 [CUDA 12.6]</span></span>
+        <span>| REPLICAS: 2</span>
+        <span>| AIR-GAPPED: <span class="hi">ACTIVE</span></span>
+      </div>
+      <div class="terminal-cols">
+        <div class="t-col">
+          <div class="t-col-title">CONTROL PANEL</div>
+          <ul class="t-menu">
+            <li class="active">Query Hazness</li>
+            <li>Fact-Checker (OCR)</li>
+            <li>Geopolitical Trends</li>
+            <li>System History</li>
+            <li>Model Parameters</li>
+            <li style="margin-top:8px">DB: MongoDB Atlas</li>
+            <li>Auth: Supabase JWT</li>
+          </ul>
+        </div>
+        <div class="t-col">
+          <div class="t-col-title">TACTICAL GRAPH &amp; INTELLIGENCE SEARCH</div>
+          <div class="query-box">Query: 'India-China Border Tensions &amp; LAC Patrol Signals 2024'</div>
+          <div class="graph-viz">
+            [ GRAPH VISUALIZATION ENGINE ]
+            <div class="graph-node-chain">
+              <span class="gn">Node: Sector 4 Patzel</span>
+              <span class="ga">&rarr;</span>
+              <span class="gn">Node: Disengagement Agreement</span>
+              <span class="ga">&rarr;</span>
+              <span class="gn">Node: Satellite Feed #892</span>
+            </div>
+          </div>
+          <div class="confidence-bar">Confidence: 98.4% | Synthesized via Qwen3 + LoRA Adapter</div>
+        </div>
+        <div class="t-col">
+          <div class="t-col-title">GPU &amp; FACT CHECK</div>
+          <div class="vram-stat">VRAM Usage: 3.6 GB / 4.0 GB</div>
+          <div class="vram-bar"><div class="vram-fill" style="width:90%"></div></div>
+          <div class="vram-stat">Throughput: 42.8 tok/sec</div>
+          <div style="height:8px"></div>
+          <div class="fact-audit">
+            <div class="fact-audit-title">FACT AUDIT: <span style="color:var(--accent2)">VERIFIED</span></div>
+            <ul>
+              <li>&bull; Source: Archive Document AI04</li>
+              <li>&bull; Citation Match: 100%</li>
+              <li>&bull; Hallucination Risk: <span style="color:var(--accent2)">0.0%</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="vram-box">
+        <div class="vram-box-title">Auditable Fact Checking</div>
+        Automated engine cross-references generated responses line-by-line with source documents (0.0% Hallucination Risk).
+      </div>
+    </div>
+  </div>
+  <div class="query-latency reveal" style="margin-top:20px">
+    <div class="ql-title">Query Latency</div>
+    <div class="ql-value">&lt; 1.2 sec latency utilizing Hybrid BM25 + Vector Retrieval.</div>
+  </div>
+</section>
+
+<!-- SLIDE 5: COMPETITIVE MATRIX -->
+<section id="matrix">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Combat Readiness Diagnostic: Competitive Matrix</h2>
+  <div style="height:30px"></div>
+  <div class="reveal">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Commercial Cloud AI (e.g., OpenAI)</th>
+          <th>Generic Local LLMs</th>
+          <th class="hi">Enersit Labs Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data Sovereignty</td>
+          <td><span class="fail">Public Servers - Fail</span></td>
+          <td><span class="pass">Offline - Pass</span></td>
+          <td class="enersit"><span class="pass">100% Air-Gapped &amp; Zero Telemetry - Pass</span></td>
+        </tr>
+        <tr>
+          <td>Hardware Footprint</td>
+          <td>Massive Server Racks</td>
+          <td><span class="warn">Requires High-End GPUs</span></td>
+          <td class="enersit"><span class="pass">Optimized for 4GB VRAM Tactical Edge - Pass</span></td>
+        </tr>
+        <tr>
+          <td>Hallucination Defense</td>
+          <td><span class="fail">High Risk</span></td>
+          <td><span class="fail">High Risk</span></td>
+          <td class="enersit"><span class="pass">Automated Line-by-Line Fact Audit - Pass</span></td>
+        </tr>
+        <tr>
+          <td>Defense Compliance</td>
+          <td><span class="fail">Banned</span></td>
+          <td><span class="warn">Untested</span></td>
+          <td class="enersit"><span class="pass">Built for CERT-In VAPT standards - Pass</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SLIDE 6: MARKET -->
+<section id="market">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Market Deployment Architecture</h2>
+  <div style="height:30px"></div>
+  <div class="market-layout">
+    <div class="market-circles reveal">
+      <div class="circle-ring cr-outer">
+        <div class="cr-text-outer">$35B+ Global Defense AI Market<br>(Growing at 20.4% CAGR)</div>
+      </div>
+      <div class="circle-ring cr-mid">
+        <div class="cr-text-mid">$3.2B India TAM for Defense &amp; GovTech<br><span style="color:var(--text-dim);font-size:0.56rem">(Driven by Make in India and iDEX mandates)</span></div>
+      </div>
+      <div class="circle-ring cr-inner">
+        <div class="cr-inner-text">$500M SAM<br>(Serviceable<br>Addressable<br>Market)</div>
+      </div>
+    </div>
+    <div class="node-cards">
+      <div class="node-card reveal">
+        <div class="node-label">NODE 1</div>
+        <div class="node-name">Defense &amp; Military</div>
+        <div class="node-desc">Army, Navy, Air Force, DRDO (Tactical document synthesis).</div>
+      </div>
+      <div class="node-card reveal">
+        <div class="node-label">NODE 2</div>
+        <div class="node-name">Intelligence Agencies</div>
+        <div class="node-desc">IB, RAW, NTRO, Police Cyber Cells (OSINT threat monitoring).</div>
+      </div>
+      <div class="node-card reveal">
+        <div class="node-label">NODE 3</div>
+        <div class="node-name">Government Ministries</div>
+        <div class="node-desc">MHA, MEA, NDMA (Geopolitical risk tracking).</div>
+      </div>
+      <div class="node-card reveal">
+        <div class="node-label">NODE 4</div>
+        <div class="node-name">Critical Enterprise</div>
+        <div class="node-desc">Defense PSUs, Energy Grid (Internal threat analytics).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: MONETIZATION -->
+<section id="monetization">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Monetization Strategy &amp; Tactical Rollout</h2>
+  <div style="height:30px"></div>
+  <div class="mono-layout">
+    <div class="mono-section reveal">
+      <div class="mono-title">Revenue Engine</div>
+      <div class="revenue-item">1. On-Premise License: Recurring per deployed GPU node.</div>
+      <div class="revenue-item">2. Integration Fees: One-time fine-tuning and air-gapped setup.</div>
+      <div class="revenue-item">3. Annual AMC: 15-20% for security patches &amp; model updates.</div>
+      <div class="revenue-item">4. Enterprise SaaS: Tiered subs for private commercial threat units.</div>
+    </div>
+    <div class="mono-section reveal">
+      <div class="mono-title">GTM Roadmap</div>
+      <div class="gtm-phases">
+        <div class="phase-item">
+          <div><div class="phase-box">Phase 1<br>(Months 1-12)</div></div>
+          <div class="phase-desc">Defense Grants (iDEX/DRDO) &amp; Pilot PoCs with State Police.</div>
+        </div>
+        <div class="phase-item">
+          <div><div class="phase-box">Phase 2<br>(Months 12-24)</div></div>
+          <div class="phase-desc">System Integrator Alliances (BEL, L&amp;T Defense) for co-bidding on large tenders.</div>
+        </div>
+        <div class="phase-item">
+          <div><div class="phase-box">Phase 3<br>(Months 24+)</div></div>
+          <div class="phase-desc">Expansion into Critical Infrastructure &amp; Banking Fraud.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: LEADERSHIP -->
+<section id="leadership">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Command Leadership: Rut Patel</h2>
+  <div style="height:30px"></div>
+  <div class="leader-layout reveal">
+    <div class="leader-card">
+      <div class="leader-avatar">&#128100;</div>
+      <div class="leader-status">STATUS: ACTIVE / FOUNDER</div>
+    </div>
+    <div class="leader-details">
+      <div class="leader-section">
+        <div class="leader-section-title">Academic Rigor</div>
+        <ul class="leader-list">
+          <li>M.Tech from IIT Patna (9.3 CGPA).</li>
+          <li>MBA in Data Science (SCIT Pune).</li>
+          <li>Executive Cybersecurity (IIIT Bangalore).</li>
+        </ul>
+      </div>
+      <div class="leader-section">
+        <div class="leader-section-title">Operational Execution</div>
+        <ul class="leader-list">
+          <li>Ex-Digital Product Manager at Airtel Cloud (Managed core AI automation and edge compute infrastructure).</li>
+          <li>Incubated stealth AI venture at Symbiosis SCIE Incubator.</li>
+        </ul>
+      </div>
+      <div class="leader-section">
+        <div class="leader-section-title">Technical Arsenal</div>
+        <ul class="leader-list">
+          <li>Sovereign RAG</li>
+          <li>Qwen3, LoRA fine-tuning</li>
+          <li>PyTorch</li>
+          <li>Air-Gapped Zero-Trust Architecture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: FUNDING -->
+<section id="funding">
+  <div class="grid-bg"></div>
+  <h2 class="slide-title reveal">Resource Deployment Dashboard: GENESIS EIR</h2>
+  <div class="funding-ask reveal">Total Ask: &#8377;7,00,000 via GENESIS EIR Grant</div>
+
+  <div class="alloc-section reveal">
+    <div class="alloc-title">Resource Allocation Dial</div>
+    <div class="alloc-dials">
+      <div class="dial-card">
+        <div class="dial-ring">
+          <svg class="dial-svg" viewBox="0 0 108 108">
+            <circle class="dial-bg" cx="54" cy="54" r="46"/>
+            <circle class="dial-fg" cx="54" cy="54" r="46" stroke="#2ec4b6" stroke-dasharray="289" stroke-dashoffset="173"/>
+          </svg>
+          <div class="dial-label">
+            <span class="dial-amount">&#8377;2.8L</span>
+            <span class="dial-pct">40%</span>
+          </div>
+        </div>
+        <div class="dial-desc">Dedicated CUDA Edge GPU Compute Testbed</div>
+      </div>
+      <div class="dial-card">
+        <div class="dial-ring">
+          <svg class="dial-svg" viewBox="0 0 108 108">
+            <circle class="dial-bg" cx="54" cy="54" r="46"/>
+            <circle class="dial-fg" cx="54" cy="54" r="46" stroke="#4ade80" stroke-dasharray="289" stroke-dashoffset="188"/>
+          </svg>
+          <div class="dial-label">
+            <span class="dial-amount" style="font-size:0.78rem">&#8377;3.15L</span>
+            <span class="dial-pct">35%</span>
+          </div>
+        </div>
+        <div class="dial-desc">Pvt Ltd Conversion (30%) + CERT-In VAPT Security Audit (15%)</div>
+      </div>
+      <div class="dial-card">
+        <div class="dial-ring">
+          <svg class="dial-svg" viewBox="0 0 108 108">
+            <circle class="dial-bg" cx="54" cy="54" r="46"/>
+            <circle class="dial-fg" cx="54" cy="54" r="46" stroke="#f59e0b" stroke-dasharray="289" stroke-dashoffset="216"/>
+          </svg>
+          <div class="dial-label">
+            <span class="dial-amount" style="color:#f59e0b">&#8377;1.05L</span>
+            <span class="dial-pct">25%</span>
+          </div>
+        </div>
+        <div class="dial-desc">Live Field Trials &amp; Police PoCs (10%) + Cloud Sandbox Contingency (5%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-section reveal">
+    <div class="timeline-title">Tactical 4-Quarter Timeline</div>
+    <div class="quarters">
+      <div class="q-card">
+        <div class="q-label">Q1 (Months 1-3)</div>
+        <div class="q-name">Entity Incorporation &amp; Setup</div>
+        <div class="q-bar"><div class="q-fill" style="width:30%"></div></div>
+        <div class="q-desc">Complete Pvt Ltd incorporation, execute IP transfer agreements, procure CUDA edge testbed, finalize core RAG engine.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q2 (Months 4-6)</div>
+        <div class="q-name">VAPT Audit &amp; GeM Portal Onboarding</div>
+        <div class="q-bar"><div class="q-fill" style="width:30%"></div></div>
+        <div class="q-desc">Conduct CERT-In VAPT audit, list Enersit Labs on GeM portal, submit iDEX challenge proposal.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q3 (Months 7-9)</div>
+        <div class="q-name">Live Pilot PoCs with Cyber Cells</div>
+        <div class="q-bar"><div class="q-fill" style="width:70%"></div></div>
+        <div class="q-desc">Deploy 2 operational PoCs with State Police Cyber Units, benchmark multi-node VRAM harness on real document archives.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q4 (Months 10-12)</div>
+        <div class="q-name">Defense Procurement Bidding</div>
+        <div class="q-bar"><div class="q-fill" style="width:10%"></div></div>
+        <div class="q-desc">Form co-bidding alliances with Defense PSUs/System Integrators, secure first paid annual software license contract.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">ENERSIT LABS</div>
+  <div>CLEARANCE: AUTHORIZED B2G REVIEW ONLY</div>
+  <div>COMMANDER: RUT PATEL | SOVEREIGN DEFENSE AI</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll(".reveal");
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: "0px 0px -50px 0px" });
+  reveals.forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-links a");
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(a => { a.style.color = a.getAttribute("href") === "#" + current ? "var(--accent)" : ""; });
+  });
+</script>
+</body>
+</html>
